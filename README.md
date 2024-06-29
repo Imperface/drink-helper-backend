@@ -68,10 +68,10 @@ cd drink-helper-backend
 npm i
 ```
 
-4. Add .env file
+4. Add .env file to root of the project.
 
 5. Run the app:
 
 ```bash
-npm run start
+npm start
 ```
