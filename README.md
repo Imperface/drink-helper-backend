@@ -37,31 +37,40 @@ The web server was created to communicate with the React application with MongoD
 <picture>
   <img width="50" src="https://user-images.githubusercontent.com/25181517/121401671-49102800-c959-11eb-9f6f-74d49a5e1774.png" alt="npm" title="npm"/>
 </picture>
-
+<picture>
+  <img width="50" src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png" alt="mongoDB" title="mongoDB"/>
+</picture>
 ## Installation
 
-Install Drink Helper with npm.
+Install Drink Helper Backend with npm.
 
-1.Clone repository:
+Application has a connection to the database.
+To install this application from github please note that you need to add the .env file to the root of the project.
+You can see the necessary variables in the .env.example file.
+Use your own MongoDB connection link.
+
+1. Clone repository:
 
 ```bash
-git clone https://github.com/Imperface/drinkHelper.git
+git clone https://github.com/Imperface/drink-helper-backend.git
 ```
 
-2.Open folder:
+2. Open folder:
 
 ```bash
-cd drinkHelper
+cd drink-helper-backend
 ```
 
-3.Install node modules:
+3. Install node modules:
 
 ```bash
 npm i
 ```
 
-4.Run the app:
+4. Add .env file
+
+5. Run the app:
 
 ```bash
-npm run dev
+npm run start
 ```
