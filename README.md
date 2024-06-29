@@ -40,6 +40,7 @@ The web server was created to communicate with the React application with MongoD
 <picture>
   <img width="50" src="https://user-images.githubusercontent.com/25181517/182884177-d48a8579-2cd0-447a-b9a6-ffc7cb02560e.png" alt="mongoDB" title="mongoDB"/>
 </picture>
+
 ## Installation
 
 Install Drink Helper Backend with npm.
