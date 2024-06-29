@@ -1,6 +1,6 @@
 # Drink Helper Backend
 
-The web server was created to communicate with the React application with MongoDB
+The web server created to handle CRUD operations of React application [Drink Helper](https://github.com/Imperface/drinkHelper).
 
 ### For the development used:
 
@@ -45,10 +45,9 @@ The web server was created to communicate with the React application with MongoD
 
 Install Drink Helper Backend with npm.
 
-Application has a connection to the database.
-To install this application from github please note that you need to add the .env file to the root of the project.
-You can see the necessary variables in the .env.example file.
-Use your own MongoDB connection link.
+### WARNING
+
+Application has a connection to the database. To install this application from github please note that you need to add the .env file to the root of the project. You can see the necessary variables in the .env.example file. Use your own MongoDB connection link.
 
 1. Clone repository:
 
