@@ -10,13 +10,12 @@ import { SignUpUserDto } from './dto/signUpUser.dto';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { SignInUserDto } from './dto/signInUser.dto';
-import { SignOutUserDto } from './dto/signOutUser.dto';
+import { IdUserDto } from './dto/idUser.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  // current user
   // update user
 
   // signUp user
@@ -50,10 +49,12 @@ export class UsersController {
     });
 
     // update token of user
-    const { id, token, name, email, avatarURL } =
-      await this.usersService.updateUserToken(user.id, newToken);
+    const updatedUser = await this.usersService.updateUserToken(
+      user.id,
+      newToken,
+    );
 
-    return { id, token, name, email, avatarURL };
+    return updatedUser;
   }
 
   // signIn user
@@ -78,19 +79,28 @@ export class UsersController {
     });
 
     // update token of user
-    const { id, token, name, email, avatarURL } =
-      await this.usersService.updateUserToken(user.id, newToken);
+    const updatedUser = await this.usersService.updateUserToken(
+      user.id,
+      newToken,
+    );
 
-    return { id, token, name, email, avatarURL };
+    return updatedUser;
   }
 
   // signOut user
 
   @Post('signOut')
   @HttpCode(204)
-  async signOutUser(@Body() signOutUserDto: SignOutUserDto) {
-    const user = await this.usersService.updateUserToken(signOutUserDto.id, '');
+  async signOutUser(@Body() idUserDto: IdUserDto) {
+    const user = await this.usersService.updateUserToken(idUserDto.id, '');
     if (!user) throw new HttpException('User not found', 404);
     return;
+  }
+
+  @Post('current')
+  @HttpCode(200)
+  async getCurrentUser(@Body() idUserDto: IdUserDto) {
+    const user = await this.usersService.getUserById(idUserDto);
+    return user;
   }
 }

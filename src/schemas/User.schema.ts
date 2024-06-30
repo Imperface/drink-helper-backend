@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { DEFAULT_AVATAR_URL } from 'src/constants/defaultAvatarURL';
 
-@Schema()
+@Schema({ versionKey: false })
 export class User {
   @Prop({ required: true })
   name: string;

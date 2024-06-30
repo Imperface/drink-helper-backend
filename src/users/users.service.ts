@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/schemas/User.schema';
 import { SignUpUserDto } from './dto/signUpUser.dto';
+import { IdUserDto } from './dto/idUser.dto';
 
 @Injectable()
 export class UsersService {
@@ -13,15 +14,15 @@ export class UsersService {
   }
 
   updateUserToken(id: string, token: string) {
-    return this.userModel.findByIdAndUpdate(id, { token }, { new: true });
+    return this.userModel.findByIdAndUpdate(
+      id,
+      { token },
+      { new: true, fields: '-password' },
+    );
   }
 
-  getUsers() {
-    return this.userModel.find();
-  }
-
-  getUserById(id: string) {
-    return this.userModel.findById(id);
+  getUserById(idUserDto: IdUserDto) {
+    return this.userModel.findById(idUserDto.id, '-password');
   }
 
   getUserByEmail(email: string) {
