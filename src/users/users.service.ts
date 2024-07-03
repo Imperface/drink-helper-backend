@@ -3,29 +3,51 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/schemas/User.schema';
 import { SignUpUserDto } from './dto/signUpUser.dto';
-import { IdUserDto } from './dto/idUser.dto';
+import { RequestService } from 'src/helpers/request/request.service';
+
+export interface UpdateUserInterface {
+  name?: string;
+  avatarURL?: string;
+}
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+  constructor(
+    @InjectModel(User.name) private userModel: Model<User>,
+    private readonly requestService: RequestService,
+  ) {}
 
   createUser(signUpUserDto: SignUpUserDto) {
     return this.userModel.create(signUpUserDto);
   }
 
-  updateUserToken(id: string, token: string) {
+  updateUserToken(token: string) {
     return this.userModel.findByIdAndUpdate(
-      id,
+      this.requestService.getUserId(),
       { token },
       { new: true, fields: '-password' },
     );
   }
 
-  getUserById(idUserDto: IdUserDto) {
-    return this.userModel.findById(idUserDto.id, '-password');
+  updateUser({ name, avatarURL }: UpdateUserInterface) {
+    return this.userModel.findByIdAndUpdate(
+      this.requestService.getUserId(),
+      { name, avatarURL },
+      {
+        new: true,
+        fields: '-password -token',
+      },
+    );
+  }
+
+  getUserById() {
+    return this.userModel.findById(
+      this.requestService.getUserId(),
+      '-password',
+    );
   }
 
   getUserByEmail(email: string) {
-    return this.userModel.findOne({ email });
+    return this.userModel.findOne({ email }, '-token');
   }
 }
